@@ -1,0 +1,89 @@
+<div class="container p-5" *ngIf="tabelaVisivel">
+    <div class="border boder-light rounded p-5" >
+      <div>
+          <button type="button" style="background-color: rgb(96, 136, 60)" class="btn btn-sn btn-secondary" (click)="ExibirFormCadastro()">
+            Incluir Produto
+          </button>
+        </div>
+
+
+    <table class="table table-hover table-sm mt-3" *ngIf="produtos">
+      <thead>
+          <tr>
+            <th>Código</th>
+            <th>Descrição</th>
+            <th>Departamento</th>
+            <th>Preço</th>
+            <th>Ativo</th>
+            <th>Ações</th>
+          </tr>
+      </thead>
+
+      <tbody>
+          <tr *ngFor="let produto of produtos">
+            <td>{{ produto.codigo }}</td>
+            <td>{{ produto.descricao }}</td>
+            <td>{{ produto.departamento }}</td>
+            <td>{{ produto.preco }}</td>
+            <td>{{ produto.ativo }}</td>
+            <td>
+                <fa-icon [icon]="faEdit" class="btn" style="color: rgb(83, 120, 190);" (click)="ExibirFormAtualiza(produto.id)"></fa-icon>
+                <fa-icon [icon]="faTrashAlt" class="btn" style="color: rgb(198, 59, 52);" (click)="ExcluirProduto(produto.id)"></fa-icon>
+
+            </td>
+          </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="container p-5" *ngIf="formularioVisivel">
+
+  <div class="row">
+      <div class="col-6 border boder-light rounded p-5 shadow" *ngIf="formulario">
+          <h6>{{ tituloFormulario }}</h6>
+          <hr/>
+
+          <form [formGroup]="formulario" (ngSubmit)="EnviarForm()">
+
+            <div class="form-group">
+                <label>Código</label>
+                <input type="text" class="form-control form-control-sm" formControlName="codigo"/>
+            </div>
+
+            <div class="form-group">
+                <label>Descrição</label>
+                <input type="text" class="form-control form-control-sm" formControlName="descricao"/>
+            </div>
+
+            <div class="form-group">
+              <label>Departamento</label>
+              <input type="text" class="form-control form-control-sm" formControlName="departamento"/>
+            </div>
+
+            <div class="form-group">
+              <label>Preço</label>
+              <input type="text" class="form-control form-control-sm" formControlName="preco"/>
+            </div>
+
+            <div class="form-group">
+
+              <label for="flexCheckChecked" class="mr-2">Ativo</label>
+              <input type="checkbox" class="form-check form-check-inline" id="flexCheckChecked" checked="checked" formControlName="ativo"/>
+
+            </div>
+
+            <div class ="container">
+                <div class="row">
+                    <div>
+                        <button type="submit" class="btn btn-sm btn-outline-secondary">Salvar</button>
+                    </div>
+                    <div class="pl-1">
+                        <button type="button" class="btn btn-sm btn-light" (click)="Voltar()">Cancelar</button>
+                    </div>
+                </div>
+            </div>
+          </form>
+      </div>
+  </div>
+</div>
